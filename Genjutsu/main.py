@@ -7,14 +7,12 @@ import base64
 import sqlite3
 import hashlib
 
-# Generate RSA keys for User 1 and User 2
 user1_key = RSA.generate(2048)
 user2_key = RSA.generate(2048)
 
 user1_public_key = user1_key.publickey()
 user2_public_key = user2_key.publickey()
 
-# Database setup
 conn = sqlite3.connect('conversations.db')
 cursor = conn.cursor()
 
@@ -49,7 +47,7 @@ def get_next_message():
     message = cursor.fetchone()
     if message:
         current_dialogue_index += 1
-        return message[0].split(": ", 1)[1]  # Remove the speaker part
+        return message[0].split(": ", 1)[1]  
     else:
         return None
 
@@ -63,7 +61,6 @@ class EncryptionApp(QWidget):
         self.setWindowTitle('RSA Encryption Simulation')
         self.setGeometry(100, 100, 900, 600)
 
-        # Set stylesheet for better styling
         self.setStyleSheet("""
             QWidget {
                 background-color: #f0f0f0;
