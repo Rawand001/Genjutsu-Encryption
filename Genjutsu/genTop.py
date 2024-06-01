@@ -1,10 +1,10 @@
 import sqlite3
 
-# Database setup
+
 conn = sqlite3.connect('conversations.db')
 cursor = conn.cursor()
 
-# Create tables for storing topics and dialogues
+
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS topics (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,7 +29,6 @@ cursor.execute('''
 ''')
 conn.commit()
 
-# Sample dataset with 20 topics and related dialogues forming conversations
 topics = [
     "Weather", "Books", "Movies", "Music", "Travel",
     "Technology", "Sports", "Food", "Education", "Health",
@@ -37,7 +36,6 @@ topics = [
     "Holidays", "Fitness", "News", "History", "Science"
 ]
 
-# Generate dialogues for each topic forming conversations
 dialogues = {
     "Weather": [
         ("Person 1: Hey, did you check the weather forecast for today?", "Person 1"),
@@ -691,7 +689,6 @@ dialogues = {
     ]
 }
 
-# Populate the database with the dataset
 for topic in topics:
     cursor.execute('INSERT INTO topics (topic) VALUES (?)', (topic,))
     topic_id = cursor.lastrowid
@@ -699,5 +696,4 @@ for topic in topics:
         cursor.execute('INSERT INTO dialogues (topic_id, message, speaker) VALUES (?, ?, ?)', (topic_id, message, speaker))
 conn.commit()
 
-# Close the database connection
 conn.close()
